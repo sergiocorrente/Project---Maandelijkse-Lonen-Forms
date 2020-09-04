@@ -8,20 +8,18 @@ namespace Project___Maandelijkse_Lonen_Forms
 {
     public class Programmeur : Werknemer
     {
-        bool Bedrijfswagen { get; set; }
+       string Bedrijfswagen { get; set; }
 
-        public Programmeur(string voornaam, string achternaam, string geslacht, DateTime geboortedatum, string rijksregisternummer, DateTime indiensttreding, string functie, double aantalUren, bool bedrijfswagen, double startloon = 2200.00, int bijdragenSocialeZekerheid = 200) : base(voornaam, achternaam, geslacht, geboortedatum, rijksregisternummer, indiensttreding, functie, aantalUren, startloon, bijdragenSocialeZekerheid)
+        public Programmeur(string voornaam, string achternaam, string geslacht, DateTime geboortedatum, string rijksregisternummer, DateTime indiensttreding, string functie, double aantalUren, string bedrijfswagen, double startloon = 2200.00, int bijdragenSocialeZekerheid = 200) : base(voornaam, achternaam, geslacht, geboortedatum, rijksregisternummer, indiensttreding, functie, aantalUren, startloon, bijdragenSocialeZekerheid)
         {
             Bedrijfswagen = bedrijfswagen;
         }
         private string functie = "Programeur";
 
-
-
         public override double Bedrijfsvoorheffing(double loon)
         {
             double BedrijfsvoorheffingLoon;
-            if (Bedrijfswagen)
+            if (Bedrijfswagen=="Ja")
             { BedrijfsvoorheffingLoon = loon * 0.1730; }
             else
             { BedrijfsvoorheffingLoon = loon * 0.1368; }
@@ -33,7 +31,7 @@ namespace Project___Maandelijkse_Lonen_Forms
             string startloon1 = Convert.ToString(StartloonNaUren());
             DateTime datetime = DateTime.Now;
 
-            string result = "\n-----------------------------------------------------------------------\n LOONBRIEF" + "  " + datetime.ToString("D") + "\n-----------------------------------------------------------------------\n NAAM                       : " + Voornaam + " " + Achternaam + " \n GESLACHT                  : " + Geslacht + "\n GEBOORTEDATUM             : " + GeboorteDatum + "\n RIJKSREGISTERNUMMER        : " + Rijksregisternummer + "\n DATUM INDIENSTTREDING      : " + Indiensttreding + "\n FUNCTIE                                  : " + functie + "\n AANTAL GEPRESTREERDE UREN : " + AantalUren + "/38" +"\nBEDRiJFWAGEN                           :"+"\n-----------------------------------------------------------------------\n STARTLOON                :   € " + Math.Round((StartloonNaUren()), 2) + "\n ANCIENNITEIT             : +€ " + Math.Round(Ancienniteit(), 2) + "\n                                           € " + Math.Round((StartloonNaUren() + Ancienniteit()), 2) + "\n SOCIALE ZEKERHEID   : -€" + BijdragenSocialeZekerheid + "\n                                           € " + Math.Round((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid), 2) + "\n BEDRIJF VOORHEFFING: -€ " + Math.Round(Bedrijfsvoorheffing((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid)), 2) + "\n                           € " + Math.Round((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid) - Bedrijfsvoorheffing((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid)), 2) + "\ntotaal                     € " + Math.Round((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid) - Bedrijfsvoorheffing((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid)), 2) + "\n-----------------------------------------------------------------------\n";
+            string result = "\n-----------------------------------------------------------------------\n LOONBRIEF" + "  " + datetime.ToString("D") + "\n-----------------------------------------------------------------------\n NAAM                       : " + Voornaam + " " + Achternaam + " \n GESLACHT                  : " + Geslacht + "\n GEBOORTEDATUM             : " + GeboorteDatum + "\n RIJKSREGISTERNUMMER        : " + Rijksregisternummer + "\n DATUM INDIENSTTREDING      : " + Indiensttreding + "\n FUNCTIE                                  : " + functie + "\n AANTAL GEPRESTREERDE UREN : " + AantalUren + "/38" +"\n BEDRiJFWAGEN                           : "+ Bedrijfswagen+"\n-----------------------------------------------------------------------\n STARTLOON                :   € " + Math.Round((StartloonNaUren()), 2) + "\n ANCIENNITEIT             : +€ " + Math.Round(Ancienniteit(), 2) + "\n                                           € " + Math.Round((StartloonNaUren() + Ancienniteit()), 2) + "\n SOCIALE ZEKERHEID   : -€" + BijdragenSocialeZekerheid + "\n                                           € " + Math.Round((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid), 2) + "\n BEDRIJF VOORHEFFING: -€ " + Math.Round(Bedrijfsvoorheffing((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid)), 2) + "\n                           € " + Math.Round((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid) - Bedrijfsvoorheffing((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid)), 2) + "\ntotaal                     € " + Math.Round((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid) - Bedrijfsvoorheffing((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid)), 2) + "\n-----------------------------------------------------------------------\n";
 
             return result;
         }

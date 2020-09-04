@@ -74,13 +74,18 @@ namespace Project___Maandelijkse_Lonen_Forms
                 return BedrijfsvoorheffingLoon;
             }
 
+        public virtual double Extras()
+        {
+            double nettoLoon = Bedrijfsvoorheffing((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid));
+            return nettoLoon;
+        }
 
         //public override string tostring()
         //{
         //    return string.format("{0} {1} geslacht: {2} in dienst sinds {3} rekening nummer {4} {5} ", voornaam, achternaam, geslacht, indiensttreding.toshortdatestring());
         //)
 
-            public string  Content()
+        public string  Content()
             {
             string startloon1 = Convert.ToString(StartloonNaUren());
             DateTime datetime = DateTime.Now;

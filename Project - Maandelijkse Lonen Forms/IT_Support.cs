@@ -40,6 +40,11 @@ namespace Project___Maandelijkse_Lonen_Forms
         }
 
 
+        public override double Extras()
+        {
+            return base.Extras() + 50;
+        }
+
 
 
 
@@ -49,7 +54,20 @@ namespace Project___Maandelijkse_Lonen_Forms
 
 
         private string functie = "IT-Support";
+        public string Content()
+        {
+            string startloon1 = Convert.ToString(StartloonNaUren());
+            DateTime datetime = DateTime.Now;
 
+            string result = "\n-----------------------------------------------------------------------\n LOONBRIEF" + "  " + datetime.ToString("D") + "\n-----------------------------------------------------------------------\n NAAM                       : " + Voornaam + " " + Achternaam + " \n GESLACHT                  : " + Geslacht + "\n GEBOORTEDATUM             : " + GeboorteDatum + "\n RIJKSREGISTERNUMMER        : " + Rijksregisternummer + "\n DATUM INDIENSTTREDING      : " + Indiensttreding + "\n FUNCTIE                                  : " + functie + "\n AANTAL GEPRESTREERDE UREN : " + AantalUren + "/38" + "\n EXTRA                                : " + Extras() + "\n-----------------------------------------------------------------------\n STARTLOON                :   € " + Math.Round((StartloonNaUren()), 2) + "\n ANCIENNITEIT             : +€ " + Math.Round(Ancienniteit(), 2) + "\n                                           € " + Math.Round((StartloonNaUren() + Ancienniteit()), 2) + "\n SOCIALE ZEKERHEID   : -€" + BijdragenSocialeZekerheid + "\n                                           € " + Math.Round((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid), 2) + "\n BEDRIJF VOORHEFFING: -€ " + Math.Round(Bedrijfsvoorheffing((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid)), 2) + "\n                           € " + Math.Round((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid) - Bedrijfsvoorheffing((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid)), 2) + "\ntotaal                     € " + Math.Round((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid) - Bedrijfsvoorheffing((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid)), 2) + "\n-----------------------------------------------------------------------\n";
+
+            return result;
+        }
+
+        public override string ToString()
+        {
+            return Voornaam + " " + Achternaam;
+        }
         //public override string ToString()
         //{
         //    return string.Format("-----------------------------------------------\nLOONBRIEF {0}\n-----------------------------------------------\nNaam                    : {1} {2}\nGeslacht                : {3}\nGeboortedatum           : {4}\nRijksregisternummer     : {5}\nDatum indiensttreding   : {6}\nFunctie                 : {7}\nAantal gepresteerde uren: {8}/38\n-----------------------------------------------\nStartloon               :  € {9}\nAncienniteit            : +€ {10}\n                           € {11}\nSociale zekerheid       : -€ {12}\n                           € {13}\nBedrijf voorheffing     : -€ {14}\n                           € {15}\nTotaal                     € {15}\n-----------------------------------------------",

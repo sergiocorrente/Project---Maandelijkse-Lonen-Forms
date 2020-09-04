@@ -32,7 +32,6 @@
             this.txtVoornaam = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txAchternaam = new System.Windows.Forms.TextBox();
-            this.txAantalUren = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -51,7 +50,18 @@
             this.button1 = new System.Windows.Forms.Button();
             this.checkWagen = new System.Windows.Forms.CheckBox();
             this.listProgrammeur = new System.Windows.Forms.ListBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.numAantalUren = new System.Windows.Forms.NumericUpDown();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listCustomer = new System.Windows.Forms.ListBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.listITsupport = new System.Windows.Forms.ListBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numAantalUren)).BeginInit();
             this.SuspendLayout();
             // 
             // cbFunctie
@@ -71,7 +81,7 @@
             // 
             // txtVoornaam
             // 
-            this.txtVoornaam.Location = new System.Drawing.Point(17, 82);
+            this.txtVoornaam.Location = new System.Drawing.Point(8, 83);
             this.txtVoornaam.Name = "txtVoornaam";
             this.txtVoornaam.Size = new System.Drawing.Size(146, 20);
             this.txtVoornaam.TabIndex = 1;
@@ -87,17 +97,10 @@
             // 
             // txAchternaam
             // 
-            this.txAchternaam.Location = new System.Drawing.Point(175, 82);
+            this.txAchternaam.Location = new System.Drawing.Point(160, 83);
             this.txAchternaam.Name = "txAchternaam";
-            this.txAchternaam.Size = new System.Drawing.Size(145, 20);
+            this.txAchternaam.Size = new System.Drawing.Size(144, 20);
             this.txAchternaam.TabIndex = 1;
-            // 
-            // txAantalUren
-            // 
-            this.txAantalUren.Location = new System.Drawing.Point(25, 332);
-            this.txAantalUren.Name = "txAantalUren";
-            this.txAantalUren.Size = new System.Drawing.Size(36, 20);
-            this.txAantalUren.TabIndex = 1;
             // 
             // label2
             // 
@@ -221,23 +224,23 @@
             // listWerknemer
             // 
             this.listWerknemer.FormattingEnabled = true;
-            this.listWerknemer.Location = new System.Drawing.Point(326, 13);
+            this.listWerknemer.Location = new System.Drawing.Point(321, 46);
             this.listWerknemer.Name = "listWerknemer";
-            this.listWerknemer.Size = new System.Drawing.Size(115, 121);
+            this.listWerknemer.Size = new System.Drawing.Size(122, 108);
             this.listWerknemer.TabIndex = 12;
             this.listWerknemer.SelectedIndexChanged += new System.EventHandler(this.listWerknemer_SelectedIndexChanged);
             // 
             // richTextToon
             // 
-            this.richTextToon.Location = new System.Drawing.Point(523, 13);
+            this.richTextToon.Location = new System.Drawing.Point(586, 25);
             this.richTextToon.Name = "richTextToon";
-            this.richTextToon.Size = new System.Drawing.Size(430, 311);
+            this.richTextToon.Size = new System.Drawing.Size(354, 311);
             this.richTextToon.TabIndex = 13;
             this.richTextToon.Text = "";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(523, 342);
+            this.button1.Location = new System.Drawing.Point(586, 362);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(113, 23);
             this.button1.TabIndex = 14;
@@ -254,21 +257,120 @@
             this.checkWagen.TabIndex = 15;
             this.checkWagen.Text = "Bedrijf wagen";
             this.checkWagen.UseVisualStyleBackColor = true;
+            this.checkWagen.Visible = false;
             // 
             // listProgrammeur
             // 
             this.listProgrammeur.FormattingEnabled = true;
-            this.listProgrammeur.Location = new System.Drawing.Point(321, 166);
+            this.listProgrammeur.Location = new System.Drawing.Point(452, 46);
             this.listProgrammeur.Name = "listProgrammeur";
-            this.listProgrammeur.Size = new System.Drawing.Size(120, 95);
+            this.listProgrammeur.Size = new System.Drawing.Size(120, 108);
             this.listProgrammeur.TabIndex = 16;
             this.listProgrammeur.SelectedIndexChanged += new System.EventHandler(this.listProgrammeur_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(315, 25);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(56, 13);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Standaard";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(449, 166);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(89, 13);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "Customer support";
+            // 
+            // numAantalUren
+            // 
+            this.numAantalUren.Location = new System.Drawing.Point(25, 328);
+            this.numAantalUren.Name = "numAantalUren";
+            this.numAantalUren.Size = new System.Drawing.Size(35, 20);
+            this.numAantalUren.TabIndex = 20;
+            this.numAantalUren.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(321, 189);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(120, 108);
+            this.listBox1.TabIndex = 21;
+            // 
+            // listCustomer
+            // 
+            this.listCustomer.FormattingEnabled = true;
+            this.listCustomer.Location = new System.Drawing.Point(452, 189);
+            this.listCustomer.Name = "listCustomer";
+            this.listCustomer.Size = new System.Drawing.Size(120, 108);
+            this.listCustomer.TabIndex = 22;
+            this.listCustomer.SelectedIndexChanged += new System.EventHandler(this.listCustomer_SelectedIndexChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(315, 25);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(56, 13);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "Standaard";
+            // 
+            // listITsupport
+            // 
+            this.listITsupport.FormattingEnabled = true;
+            this.listITsupport.Location = new System.Drawing.Point(321, 189);
+            this.listITsupport.Name = "listITsupport";
+            this.listITsupport.Size = new System.Drawing.Size(120, 108);
+            this.listITsupport.TabIndex = 21;
+            this.listITsupport.SelectedIndexChanged += new System.EventHandler(this.listITsupport_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(318, 166);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(57, 13);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "IT Support";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(449, 25);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(72, 13);
+            this.label12.TabIndex = 18;
+            this.label12.Text = "Programmeur ";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(379, 9);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(91, 13);
+            this.label13.TabIndex = 23;
+            this.label13.Text = "Werknemer lijsten";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1007, 450);
+            this.ClientSize = new System.Drawing.Size(966, 450);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.listCustomer);
+            this.Controls.Add(this.listITsupport);
+            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.numAantalUren);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.listProgrammeur);
             this.Controls.Add(this.checkWagen);
             this.Controls.Add(this.button1);
@@ -286,7 +388,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txAantalUren);
             this.Controls.Add(this.txAchternaam);
             this.Controls.Add(this.txtVoornaam);
             this.Controls.Add(this.cbFunctie);
@@ -296,6 +397,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numAantalUren)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -307,7 +409,6 @@
         private System.Windows.Forms.TextBox txtVoornaam;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txAchternaam;
-        private System.Windows.Forms.TextBox txAantalUren;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -326,6 +427,16 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckBox checkWagen;
         private System.Windows.Forms.ListBox listProgrammeur;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown numAantalUren;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listCustomer;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ListBox listITsupport;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
     }
 }
 
