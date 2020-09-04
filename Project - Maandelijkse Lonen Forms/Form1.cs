@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,25 +19,20 @@ namespace Project___Maandelijkse_Lonen_Forms
             InitializeComponent();
         }
         List<Werknemer> WerknemerList= new List<Werknemer>();
+        List<Programmeur> ProgrammeurList = new List<Programmeur>();
         string geslacht;
+
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             //lbAvailable.Items.Clear();
             switch (cbFunctie.SelectedItem)
             {
-                case "Standard":  radWagJaa.Hide();
-                                  radWagNee.Hide();
+                case "Standard": checkWagen.Visible = false;
                                     break;
-                case "Programmeur":radWagJaa.Show(); 
-                                   radWagNee.Show(); break;
-                case "IT support": radWagJaa.Hide(); 
-                                   radWagNee.Hide(); break;
-                case "Customer Support":
-                                  radWagJaa.Hide(); radWagNee.Hide(); MessageBox.Show(cbFunctie.Text);
-                                   break;
-                           
-
-
+                case "Programmeur": checkWagen.Visible = true; break;
+                case "IT support": checkWagen.Visible = false; break;
+                case "Customer Support": checkWagen.Visible = false; break;
+               
                 default:
                     break;
             }
@@ -46,7 +43,7 @@ namespace Project___Maandelijkse_Lonen_Forms
 
         private void butAdd_Click(object sender, EventArgs e)
         {
-            if (cbFunctie.Text=="Standard")
+            if (cbFunctie.Text=="Standaard")
             {
                 if (radMan.Checked)
                 {
@@ -60,19 +57,87 @@ namespace Project___Maandelijkse_Lonen_Forms
                 WerknemerList.Add(new Werknemer(txtVoornaam.Text, txAchternaam.Text,geslacht,dateGeboorte.Value,txRijks.Text,dateGeprestreerde.Value,cbFunctie.Text,Convert.ToInt32(txAantalUren.Text)));
 
                 int count = WerknemerList.Count -1;
-                MessageBox.Show(Convert.ToString(count));
                 listWerknemer.Items.Add(WerknemerList[count]);
 
 
                
               
             }
+
+            if (cbFunctie.Text == "Programmeur")
+            {
+                if (radMan.Checked)
+                {
+                    geslacht = radMan.Text;
+                }
+                if (radiVrouw.Checked)
+                {
+                    geslacht = radiVrouw.Text;
+                }
+
+                ProgrammeurList.Add(new Programmeur(txtVoornaam.Text, txAchternaam.Text, geslacht, dateGeboorte.Value, txRijks.Text, dateGeprestreerde.Value, cbFunctie.Text, Convert.ToInt32(txAantalUren.Text),checkWagen.Checked));
+
+                int count = ProgrammeurList.Count - 1;
+                MessageBox.Show(Convert.ToString(count));
+                listProgrammeur.Items.Add(ProgrammeurList[count]);
+
+
+
+
+            }
         }
 
         private void listWerknemer_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Werknemer werknemer = (Werknemer)listWerknemer.SelectedItem;
+
+            Werknemer WerknemerList = (Werknemer)listWerknemer.SelectedItem;
+            
+
+
+            //Programmeur ProgrammeurList = (Programmeur)listWerknemer.SelectedItem;
+            richTextToon.Text = WerknemerList.Content();
            
+
+        }
+
+        private void listProgrammeur_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Programmeur ProgrammeurList = (Programmeur)listProgrammeur.SelectedItem;
+            //Programmeur ProgrammeurList = (Programmeur)listWerknemer.SelectedItem;
+            richTextToon.Text = ProgrammeurList.Content();
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Text files|*.txt" })
+            {
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    using (StreamReader read = new StreamReader(ofd.FileName))
+                    {
+                        while (true) ;
+                    }
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "Text files|*.txt" })
+            {
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    using (StreamWriter write = new StreamWriter(sfd.FileName, true, Encoding.UTF8))
+                    {
+                        write.WriteLine(richTextToon.Text);
+                    }
+                }
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
         }
     }

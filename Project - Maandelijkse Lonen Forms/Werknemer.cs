@@ -22,7 +22,7 @@ namespace Project___Maandelijkse_Lonen_Forms
             public double AantalUren { get; set; }
             public double Startloon { get; }
             public int BijdragenSocialeZekerheid { get; }
-            public Werknemer(string voornaam, string achternaam, string geslacht, DateTime geboortedatum, string rijksregisternummer, DateTime indiensttreding, string functie, double aantalUren, double startloon = 1900.00, int bijdragenSocialeZekerheid = 200)
+        public Werknemer(string voornaam, string achternaam, string geslacht, DateTime geboortedatum, string rijksregisternummer, DateTime indiensttreding, string functie, double aantalUren, double startloon = 1900.00, int bijdragenSocialeZekerheid = 200)
             {
                 Voornaam = voornaam;
                 Achternaam = achternaam;
@@ -65,7 +65,7 @@ namespace Project___Maandelijkse_Lonen_Forms
                     Loon *= 1.01;
                 }
                 //Loon -= BijdragenSocialeZekerheid;
-                return Math.Round(Loon - StartloonNaUren(), 2);
+                return Loon - StartloonNaUren();
                 //return AantalJarenDienst;
             }
             public virtual double Bedrijfsvoorheffing(double loon)
@@ -74,17 +74,28 @@ namespace Project___Maandelijkse_Lonen_Forms
                 return BedrijfsvoorheffingLoon;
             }
 
-        //public override string ToString()
+
+        //public override string tostring()
         //{
-        //    return string.Format("{0} {1} geslacht: {2} in dienst sinds {3} rekening nummer {4} {5} ", voornaam, achternaam, geslacht, indiensttreding.toshortdatestring());
+        //    return string.format("{0} {1} geslacht: {2} in dienst sinds {3} rekening nummer {4} {5} ", voornaam, achternaam, geslacht, indiensttreding.toshortdatestring());
         //)
 
+            public string  Content()
+            {
+            string startloon1 = Convert.ToString(StartloonNaUren());
+            DateTime datetime = DateTime.Now;
 
+            string result = "\n-----------------------------------------------------------------------\n LOONBRIEF" + "  " + datetime.ToString("D") + "\n-----------------------------------------------------------------------\n NAAM                       : " + Voornaam + " " + Achternaam + " \n GESLACHT                  : " + Geslacht + "\n GEBOORTEDATUM             : " + GeboorteDatum + "\n RIJKSREGISTERNUMMER        : " + Rijksregisternummer + "\n DATUM INDIENSTTREDING      : " + Indiensttreding + "\n FUNCTIE                                  : " + functie + "\n AANTAL GEPRESTREERDE UREN : " + AantalUren + "/38" + "\n-----------------------------------------------------------------------\n STARTLOON                :   € " + Math.Round((StartloonNaUren()),2) + "\n ANCIENNITEIT             : +€ "  + Math.Round(Ancienniteit(),2) + "\n                                           € "+ Math.Round((StartloonNaUren()+ Ancienniteit()),2) +"\n SOCIALE ZEKERHEID   : -€"+BijdragenSocialeZekerheid +"\n                                           € "+ Math.Round((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid), 2) +"\n BEDRIJF VOORHEFFING: -€ "+ Math.Round(Bedrijfsvoorheffing((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid)),2) +"\n                           € "+ Math.Round((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid) - Bedrijfsvoorheffing((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid)), 2)+"\ntotaal                     € " + Math.Round((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid) - Bedrijfsvoorheffing((StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid)), 2)+"\n-----------------------------------------------------------------------\n";
+            //string result ="-----------------------------------------------\nloonbrief {0}\n-----------------------------------------------\nnaam                    : {1} {2}\ngeslacht                : {3}\ngeboortedatum           : {4}\nrijksregisternummer     : {5}\ndatum indiensttreding   : {6}\nfunctie                 : {7}\naantal gepresteerde uren: {8}/38\n-----------------------------------------------\nsartloon                :  € {9}\nancienniteit            : +€ {10}\n                           € {11}\nsociale zekerheid       : -€ {12}\n                           € {13}\nbedrijf voorheffing     : -€ {14}\n                           € {15}\ntotaal                     € {15}\n-----------------------------------------------",
+            //datetime, Voornaam, Achternaam, geslacht, geboortedatum.toshortdatestring(), rijksregisternummer, indiensttreding.toshortdatestring(), functie, aantaluren, startloonnauren(), ancienniteit(), (startloonnauren() + ancienniteit()), bijdragensocialezekerheid, (startloonnauren() + ancienniteit()) - bijdragensocialezekerheid, math.round(bedrijfsvoorheffing(startloonnauren()), 2), math.round(startloonnauren() + ancienniteit() - bijdragensocialezekerheid - bedrijfsvoorheffing(startloonnauren()), 2), math.round((startloonnauren() + ancienniteit()) - bijdragensocialezekerheid - bedrijfsvoorheffing(startloonnauren()), 2));
+            
+            return result;
+            }
 
-        //public override string ToString()
+        //public override string tostring()
         //{
-        //    return string.Format("-----------------------------------------------\nLOONBRIEF {0}\n-----------------------------------------------\nNaam                    : {1} {2}\nGeslacht                : {3}\nGeboortedatum           : {4}\nRijksregisternummer     : {5}\nDatum indiensttreding   : {6}\nFunctie                 : {7}\nAantal gepresteerde uren: {8}/38\n-----------------------------------------------\nSartloon                :  € {9}\nAncienniteit            : +€ {10}\n                           € {11}\nSociale zekerheid       : -€ {12}\n                           € {13}\nBedrijf voorheffing     : -€ {14}\n                           € {15}\nTotaal                     € {15}\n-----------------------------------------------",
-        //    DateTime.Now.ToShortDateString(), Voornaam, Achternaam, Geslacht, GeboorteDatum.ToShortDateString(), Rijksregisternummer, Indiensttreding.ToShortDateString(), functie, AantalUren, StartloonNaUren(), Ancienniteit(), (StartloonNaUren() + Ancienniteit()), BijdragenSocialeZekerheid, (StartloonNaUren() + Ancienniteit()) - BijdragenSocialeZekerheid, Math.Round(Bedrijfsvoorheffing(StartloonNaUren()), 2), Math.Round(StartloonNaUren() + Ancienniteit() - BijdragenSocialeZekerheid - Bedrijfsvoorheffing(StartloonNaUren()), 2), Math.Round((StartloonNaUren() + Ancienniteit()) - BijdragenSocialeZekerheid - Bedrijfsvoorheffing(StartloonNaUren()), 2));
+        //    return string.format("-----------------------------------------------------------\nloonbrief {0}\n-----------------------------------------------\nnaam                    : {1} {2}\ngeslacht                : {3}\ngeboortedatum           : {4}\nrijksregisternummer     : {5}\ndatum indiensttreding   : {6}\nfunctie                 : {7}\naantal gepresteerde uren: {8}/38\n-----------------------------------------------\nsartloon                :  € {9}\nancienniteit            : +€ {10}\n                           € {11}\nsociale zekerheid       : -€ {12}\n                           € {13}\nbedrijf voorheffing     : -€ {14}\n                           € {15}\ntotaal                     € {15}\n-----------------------------------------------",
+        //    datetime.now.toshortdatestring(), voornaam, achternaam, geslacht, geboortedatum.toshortdatestring(), rijksregisternummer, indiensttreding.toshortdatestring(), functie, aantaluren, startloonnauren(), ancienniteit(), (startloonnauren() + ancienniteit()), bijdragensocialezekerheid, (startloonnauren() + ancienniteit()) - bijdragensocialezekerheid, math.round(bedrijfsvoorheffing(startloonnauren()), 2), math.round(startloonnauren() + ancienniteit() - bijdragensocialezekerheid - bedrijfsvoorheffing(startloonnauren()), 2), math.round((startloonnauren() + ancienniteit()) - bijdragensocialezekerheid - bedrijfsvoorheffing(startloonnauren()), 2));
         //}
         public override string ToString()
         {
